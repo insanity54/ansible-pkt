@@ -1,0 +1,62 @@
+---
+
+- name: create download folder for pkt
+  become: yes
+  file:
+    state: directory
+    owner: root
+    group: root
+    dest: /opt/pkt/{{ packetcrypt_version }}
+
+- name: download packetcrypt
+  become: yes
+  get_url:
+    url: "https://github.com/cjdelisle/packetcrypt_rs/releases/download/packetcrypt-{{ packetcrypt_version }}/packetcrypt-{{ packetcrypt_version }}-linux_amd64"
+    dest: /opt/pkt/{{ packetcrypt_version }}
+  notify: restart packetcrypt
+
+- name: ensure packetcrypt is executable
+  become: yes
+  file:
+    path: /opt/pkt/{{ packetcrypt_version }}/packetcrypt-{{ packetcrypt_version }}-linux_amd64
+    mode: '0755'
+
+- name: link packetcrypt executable
+  become: yes
+  file:
+    state: link
+    owner: root
+    group: root
+    dest: /usr/local/bin/packetcrypt
+    src: /opt/pkt/{{ packetcrypt_version }}/packetcrypt-{{ packetcrypt_version }}-linux_amd64
+
+
+- name: install packetcrypt system service
+  become: yes
+  template:
+    src: packetcrypt.service.j2
+    dest: /etc/systemd/system/packetcrypt.service
+    owner: root
+    group: root
+    mode: '0644'
+  notify:
+    - reload systemd
+    - restart packetcrypt
+
+- name: make pkt group
+  become: yes
+  group:
+    state: present
+    name: pkt
+
+- name: make pkt user
+  become: yes
+  user:
+    state: present
+    name: pkt
+    group: pkt
+    shell: /bin/bash
+    home: /home/pkt
+    comment: PKT user
+    system: yes
+

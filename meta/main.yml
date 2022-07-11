@@ -1,0 +1,18 @@
+galaxy_info:
+  author: Chris Grimmett <chris@grimtech.net>
+  namespace: insanity54
+  description: PKT is an ecosystem of apps that decentralize access to the internet.
+  license: Unlicense
+  min_ansible_version: 2.2
+  platforms:
+    - name: Ubuntu
+      versions:
+        - jammy
+
+  galaxy_tags:
+    - pkt
+    - networking
+    - distributed
+    - p2p
+    - internet
+    - crypto

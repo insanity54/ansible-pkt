@@ -1,0 +1,13 @@
+[Unit]
+Description=packetcrypt daemon (PKT miner)
+After=network.target
+
+[Service]
+ExecStart=/usr/local/bin/packetcrypt -p {{ payment_address }} 
+Restart=on-failure
+StartLimitIntervalSec=0
+RestartSec=3
+User=pkt
+
+[Install]
+WantedBy=multi-user.target

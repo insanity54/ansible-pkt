@@ -1,0 +1,13 @@
+---
+- name: reload systemd
+  become: yes
+  systemd: daemon_reload=yes
+  notify: restart packetcrypt
+
+- name: restart packetcrypt
+  become: yes
+  service:
+    name: packetcrypt
+    enabled: yes
+    state: restarted
+    use: systemd
