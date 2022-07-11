@@ -1,4 +1,12 @@
 ---
 
 packetcrypt_version: v0.5.2
-payment_address: pkt1q4f3x0h5h9zzvhf27r9d0fwhvxplc7y0r26rden
+packetcrypt_mineold: -1
+packetcrypt_paymentaddr: pkt1q4f3x0h5h9zzvhf27r9d0fwhvxplc7y0r26rden
+packetcrypt_threads: 12
+packetcrypt_uploaders: 10
+packetcrypt_uploadtimeout: 30
+packetcrypt_pools: 
+  - http://pool.pkt.world
+  - http://pool.pktpool.io
+  - http://pool.pkteer.com

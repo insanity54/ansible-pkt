@@ -4,17 +4,6 @@
   become: true
 
   pre_tasks:
-    # The Fedora 30+ container images have only C.UTF-8 installed
-    - name: Set database locale if using Fedora 30+ or RedHat 8+
-      set_fact:
-        postgresql_databases:
-          - name: example
-            lc_collate: 'C.UTF-8'
-            lc_ctype: 'C.UTF-8'
-      when:
-        - ( ansible_distribution == 'Fedora' and ansible_distribution_major_version >= '30') or
-          ( ansible_os_family == 'RedHat' and ansible_distribution_major_version == '8')
-
     - name: Update apt cache.
       apt: update_cache=true cache_valid_time=600
       changed_when: false
@@ -24,8 +13,8 @@
     - role: insanity54.pkt
 
   post_tasks:
-    - name: Verify packetcrypt is running.
-      command: "/usr/local/bin/packetcrypt version"
+    - name: Verify packetcrypt is installed.
+      command: "/usr/local/bin/packetcrypt -v"
       changed_when: false
       become: true
       become_user: pkt
