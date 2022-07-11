@@ -1,0 +1,8 @@
+{
+    "pools": [{% for pool in packetcrypt_pools %}"{{ pool }}"{% if not loop.last %},{% endif %}{% endfor %}],
+    "threads": {{ packetcrypt_threads }},
+    "payment_addr": "{{ packetcrypt_paymentaddr }}",
+    "uploaders": {{ packetcrypt_uploaders }},
+    "upload_timeout": {{ packetcrypt_uploadtimeout }},
+    "mine_old_anns": {{packetcrypt_mineold}}
+}

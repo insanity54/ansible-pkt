@@ -3,18 +3,12 @@ Description=packetcrypt daemon (PKT miner)
 After=network.target
 
 [Service]
-ExecStart=/usr/local/bin/packetcrypt ann \
-  --mineold {{ packetcrypt_mineold }} \
-  --paymentaddr {{ packetcrypt_paymentaddr }} \
-  --threads {{ packetcrypt_threads }} \
-  --uploaders {{ packetcrypt_uploaders }} \
-  --uploadtimeout {{ packetcrypt_uploadtimeout }} \
-  {% for pool in packetcrypt_pools %}{{ pool }} {% endfor %}
 Restart=on-failure
 RestartSec=3
 StartLimitBurst=5
 StartLimitInterval=0
 User=pkt
+ExecStart=/usr/local/bin/packetcrypt ann --config /home/pkt/packetcrypt-config.json
 
 [Install]
 WantedBy=multi-user.target

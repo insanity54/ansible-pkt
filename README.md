@@ -8,4 +8,4 @@ A role which installs packetcrypt configured for announcement mining.
 
 ## Variables
 
-See defaults/main.yml for overridable
+See ./defaults/main.yml
