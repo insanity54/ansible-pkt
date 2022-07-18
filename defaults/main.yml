@@ -2,6 +2,7 @@
 
 packetcrypt_version: v0.5.2
 packetcrypt_pools: 
+  - https://stratum.zetahash.com
   - http://pool.pkt.world
   - http://pool.pktpool.io
   - http://pool.pkteer.com
